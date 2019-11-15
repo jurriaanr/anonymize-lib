@@ -1,0 +1,33 @@
+{
+    "name": "oberon/anonymize",
+    "description": "Library for anonymizing different kind of data",
+    "type": "library",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Jurriaan Ruitenberg",
+            "email": "jur@oberon.nl"
+        }
+    ],
+    "require": {
+        "php": "^7.1.0",
+        "doctrine/annotations": "^1.8",
+        "doctrine/common": "^2.11",
+        "doctrine/event-manager": "^1.1",
+        "doctrine/orm": "^2.6",
+        "symfony/property-access": "^4.3"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^4.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Oberon\\Anonymize\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Oberon\\Anonymize\\Tests\\": "tests/"
+        }
+    }
+}

@@ -1,0 +1,15 @@
+.idea/*
+.project
+.settings
+.DS_Store
+*.orig
+*~
+docker-compose.override.yml
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/var/
+/vendor/
+###< symfony/framework-bundle ###
