@@ -7,32 +7,36 @@
 
 namespace Oberon\Anonymize\Annotations;
 
-use Doctrine\Common\Annotations\Annotation\Enum;
-use Doctrine\Common\Annotations\Annotation\Required;
-use Doctrine\Common\Annotations\Annotation\Target;
-
-/**
- * @Annotation
- * @Target({"PROPERTY"})
- * @Attributes({
- *   @Attribute("strategy", type = "string"),
- * })
- */
-class AnonymizeProperty
+abstract class AnonymizeProperty
 {
-    /**
-     * @Required()
-     * @Enum({StrategyInterface::MASK, StrategyInterface::CUSTOM})
-     */
-    private $strategy;
-
     public function __construct(array $values)
     {
-        $this->strategy = $values['strategy'];
+        foreach ($values as $key => $value) {
+            $this->$key = $value;
+        }
     }
 
-    public function getStrategy(): string
+    abstract public function getStrategy(): string;
+
+    /**
+     * Error handler for unknown property
+     * @throws \BadMethodCallException
+     */
+    public function __get(string $name): string
     {
-        return $this->strategy;
+        throw new \BadMethodCallException(
+            sprintf("Unknown property '%s' on annotation '%s'.", $name, get_class($this))
+        );
+    }
+
+    /**
+     * Error handler for unknown property
+     * @throws \BadMethodCallException
+     */
+    public function __set(string $name, $value)
+    {
+        throw new \BadMethodCallException(
+            sprintf("Unknown property '%s' on annotation '%s'.", $name, get_class($this))
+        );
     }
 }

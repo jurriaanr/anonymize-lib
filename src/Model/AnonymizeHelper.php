@@ -46,7 +46,7 @@ class AnonymizeHelper
      * @return AnnotatedProperty[]
      * @throws AnnotationException
      */
-    public function getAnnotatedPPropertiesForClass(string $class): array
+    public function getAnnotatedPropertiesForClass(string $class): array
     {
         try {
             // create reflection class to get properties

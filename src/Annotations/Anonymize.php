@@ -44,7 +44,7 @@ class Anonymize
     {
         $this->mode = isset($values['mode']) ? $values['mode'] : self::FIRST_TIME;
         $this->dateField = isset($values['dateField']) ? $values['dateField'] : '';
-        $this->dateInterval = isset($values['dateInterval']) ? $values['dateField'] : 'P3M';
+        $this->dateInterval = isset($values['dateInterval']) ? $values['dateInterval'] : 'P3M';
     }
 
     public function getMode()

@@ -19,7 +19,8 @@ abstract class AbstractStrategy implements Strategy
     /** @var Anonymize */
     protected $classAnnotation;
 
-    abstract public function handle($entity, AnonymizeProperty $annotation, \ReflectionProperty $property): void;
+    /** @return mixed */
+    abstract public function handle($entity, AnonymizeProperty $annotation, \ReflectionProperty $property);
 
     /**
      * @throws \Exception
@@ -27,7 +28,8 @@ abstract class AbstractStrategy implements Strategy
     public function anonymize($entity, AnonymizeProperty $annotation, \ReflectionProperty $property): void
     {
         if ($this->shouldAnonymize($entity, $annotation)) {
-            $this->handle($entity, $annotation, $property);
+            $value = $this->handle($entity, $annotation, $property);
+            $property->setValue($entity, $value);
         }
     }
 

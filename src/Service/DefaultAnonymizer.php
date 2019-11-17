@@ -49,7 +49,7 @@ class DefaultAnonymizer implements Anonymizer
         // for each of these classes, find if there are annotations and if so, handle them
         array_walk($classes, function (string $class) use ($manager) {
             $classAnnotation = $this->helper->getClassAnnotation($class);
-            $annotatedProperties = $this->helper->getAnnotatedPPropertiesForClass($class);
+            $annotatedProperties = $this->helper->getAnnotatedPropertiesForClass($class);
             if ($classAnnotation && $annotatedProperties) {
                 $this->handleAnnotations($class, $classAnnotation, $annotatedProperties, $manager);
             }
@@ -61,7 +61,7 @@ class DefaultAnonymizer implements Anonymizer
     private function handleAnnotations(string $class, Anonymize $classAnnotation, array $annotatedProperties, ObjectManager $manager, int $batchSize = 100): void
     {
         // get all entities for the given Entity class
-        $entities = $this->entityResolver->resolve($class, $manager);
+        $entities = $this->entityResolver->resolve($class, $classAnnotation, $manager);
 
         $batchIndex = 0;
 
@@ -83,14 +83,12 @@ class DefaultAnonymizer implements Anonymizer
                 $entity->setAnonymizedAt(new \DateTime());
             }
 
-            if ($batchIndex === $batchSize) {
+            if (++$batchIndex % $batchSize === 0) {
                 // save changes to entity
                 $manager->flush();
 
                 // detach from Doctrine, so that it can be GC'd immediately
                 $manager->clear($class);
-            } else {
-                $batchIndex++;
             }
         }
 
