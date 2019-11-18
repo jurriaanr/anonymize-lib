@@ -16,7 +16,7 @@ use Oberon\Anonymize\Strategy\Strategy;
  *   @Attribute("replaceCount", type = "int"),
  * })
  */
-class Lattitude extends AnonymizeProperty
+class LatLng extends AnonymizeProperty
 {
     public $char = '*';
     public $maskCount = 4;

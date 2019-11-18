@@ -12,10 +12,7 @@ use \DateTime;
 interface AnonymizableInterface
 {
     public function getAnonymizedAt(): ?DateTime;
-    /**
-     * @param DateTime|null $anonymizedAt
-     * @return self
-     */
+    /** @return self */
     public function setAnonymizedAt(?DateTime $anonymizedAt);
     public function isAnonymized(): bool;
 }
