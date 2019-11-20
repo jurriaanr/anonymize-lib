@@ -12,6 +12,7 @@ interface Strategy
     const HASH = Hash::class;
     const IP = Ip::class;
     const LAT_LNG = LatLng::class;
+    const ZIP_NL = ZipNL::class;
 
     public function setClassAnnotation(Anonymize $classAnnotation): void;
     public function anonymize($entity, AnonymizeProperty $annotation, \ReflectionProperty $property): void;
