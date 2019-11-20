@@ -9,6 +9,9 @@ interface Strategy
 {
     const MASK = Mask::class;
     const REGEX = Regex::class;
+    const HASH = Hash::class;
+    const IP = Ip::class;
+    const LAT_LNG = LatLng::class;
 
     public function setClassAnnotation(Anonymize $classAnnotation): void;
     public function anonymize($entity, AnonymizeProperty $annotation, \ReflectionProperty $property): void;

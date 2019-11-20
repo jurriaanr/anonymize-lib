@@ -9,7 +9,7 @@ namespace Oberon\Anonymize\Strategy;
 
 use Oberon\Anonymize\Annotations\AnonymizeProperty;
 
-class Hash extends AbstractStrategy
+final class Hash extends AbstractStrategy
 {
     public function handle($entity, AnonymizeProperty $annotation, \ReflectionProperty $property)
     {

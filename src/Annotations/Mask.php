@@ -13,7 +13,7 @@ use Oberon\Anonymize\Strategy\Strategy;
  *   @Attribute("replaceCount", type = "int"),
  * })
  */
-class Mask extends AnonymizeProperty
+final class Mask extends AnonymizeProperty
 {
     public $char = '*';
     public $maskCount = 4;

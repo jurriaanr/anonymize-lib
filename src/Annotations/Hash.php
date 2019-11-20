@@ -7,6 +7,8 @@
 
 namespace Oberon\Anonymize\Annotations;
 
+use Oberon\Anonymize\Strategy\Strategy;
+
 /**
  * @Annotation
  * @Target({"PROPERTY"})
@@ -15,7 +17,7 @@ namespace Oberon\Anonymize\Annotations;
  *   @Attribute("salt", type = "string"),
  * })
  */
-class Hash extends AnonymizeProperty
+final class Hash extends AnonymizeProperty
 {
     /**
      * Any of the algorithms listed by hash_algos()
@@ -27,6 +29,6 @@ class Hash extends AnonymizeProperty
 
     public function getStrategy(): string
     {
-        return '';
+        return Strategy::HASH;
     }
 }

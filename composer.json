@@ -15,7 +15,7 @@
         "doctrine/common": "^2.11",
         "doctrine/event-manager": "^1.1",
         "doctrine/orm": "^2.6",
-        "symfony/property-access": "^4.3"
+        "symfony/property-access": "^3.4 || ^4.0 || ^5.0"
     },
     "require-dev": {
         "symfony/var-dumper": "^4.3"

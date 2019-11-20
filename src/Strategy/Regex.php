@@ -4,7 +4,7 @@ namespace Oberon\Anonymize\Strategy;
 
 use Oberon\Anonymize\Annotations\AnonymizeProperty;
 
-class Regex extends AbstractStrategy
+final class Regex extends AbstractStrategy
 {
     public function handle($entity, AnonymizeProperty $annotation, \ReflectionProperty $property)
     {

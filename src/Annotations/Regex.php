@@ -15,7 +15,7 @@ use Oberon\Anonymize\Strategy\Strategy;
  *   @Attribute("delimiter", type = "string"),
  * })
  */
-class Regex extends AnonymizeProperty
+final class Regex extends AnonymizeProperty
 {
     /** @Required() */
     public $regex;
