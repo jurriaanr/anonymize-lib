@@ -7,6 +7,7 @@
 
 namespace Oberon\Anonymize\Annotations;
 
+use Oberon\Anonymize\Model\AbstractAnonymizeProperty;
 use Oberon\Anonymize\Strategy\Strategy;
 
 /**
@@ -19,7 +20,7 @@ use Oberon\Anonymize\Strategy\Strategy;
  *   @Attribute("asValid", type = "bool"),
  * })
  */
-final class ZipNL extends AnonymizeProperty
+final class ZipNL extends AbstractAnonymizeProperty
 {
     /**
      * 0 is streetlevel (numbers remain as the are)

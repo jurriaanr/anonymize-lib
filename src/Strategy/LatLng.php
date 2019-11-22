@@ -7,7 +7,7 @@
 
 namespace Oberon\Anonymize\Strategy;
 
-use Oberon\Anonymize\Annotations\AnonymizeProperty;
+use Oberon\Anonymize\Model\AnonymizePropertyInterface;
 
 final class LatLng extends AbstractStrategy
 {
@@ -18,14 +18,14 @@ final class LatLng extends AbstractStrategy
     const HEMISPHERE = 'hemisphere'; // changes the value to -1 for Southern / Western hemisphere or +1 for Northern / Eastern
 
     /** @return mixed */
-    public function handle($entity, AnonymizeProperty $annotation, \ReflectionProperty $property)
+    public function handle($entity, AnonymizePropertyInterface $anonymizeProperty, \ReflectionProperty $property)
     {
         $val = self::latLng(
             $property->getValue($entity),
-            $annotation->accuracy
+            $anonymizeProperty->accuracy
         );
 
-        return $annotation->asString ? (string) $val : $val;
+        return $anonymizeProperty->asString ? (string) $val : $val;
     }
 
     public static function latLng($latLng, $accuracy): float

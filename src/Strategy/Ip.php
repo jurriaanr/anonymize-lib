@@ -7,14 +7,13 @@
 
 namespace Oberon\Anonymize\Strategy;
 
-use Oberon\Anonymize\Annotations\AnonymizeProperty;
-use Symfony\Component\HttpFoundation\IpUtils;
+use Oberon\Anonymize\Model\AnonymizePropertyInterface;
 
 final class Ip extends AbstractStrategy
 {
 
     /** @return mixed */
-    public function handle($entity, AnonymizeProperty $annotation, \ReflectionProperty $property)
+    public function handle($entity, AnonymizePropertyInterface $anonymizeProperty, \ReflectionProperty $property)
     {
         return self::ip(
             $property->getValue($entity)

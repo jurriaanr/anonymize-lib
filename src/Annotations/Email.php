@@ -1,8 +1,8 @@
 <?php
 /**
  * User: Jurriaan Ruitenberg
- * Date: 20-11-2019
- * Time: 09:40
+ * Date: 22-11-2019
+ * Time: 16:50
  */
 
 namespace Oberon\Anonymize\Annotations;
@@ -14,12 +14,16 @@ use Oberon\Anonymize\Strategy\Strategy;
  * @Annotation
  * @Target({"PROPERTY"})
  * @Attributes({
+ *   @Attribute("char", type = "string"),
  * })
  */
-final class Ip extends AbstractAnonymizeProperty
+class Email extends AbstractAnonymizeProperty
 {
+    /** @var string */
+    public $char = '_';
+
     public function getStrategy(): string
     {
-        return Strategy::IP;
+        return Strategy::EMAIL;
     }
 }

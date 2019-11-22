@@ -3,6 +3,7 @@
 namespace Oberon\Anonymize\Annotations;
 
 use Doctrine\Common\Annotations\Annotation\Enum;
+use Oberon\Anonymize\Model\AbstractAnonymizeProperty;
 use Oberon\Anonymize\Strategy\LatLng as StratLatLng;
 use Oberon\Anonymize\Strategy\Strategy;
 
@@ -16,7 +17,7 @@ use Oberon\Anonymize\Strategy\Strategy;
  *   @Attribute("asString", type = "boolean"),
  * })
  */
-final class LatLng extends AnonymizeProperty
+final class LatLng extends AbstractAnonymizeProperty
 {
     /**
      * @Enum({StratLatLng::STREET, StratLatLng::CITY, StratLatLng::COUNTRY, StratLatLng::GLOBALLY, StratLatLng::HEMISPHERE})

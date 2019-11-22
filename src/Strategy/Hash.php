@@ -7,20 +7,21 @@
 
 namespace Oberon\Anonymize\Strategy;
 
-use Oberon\Anonymize\Annotations\AnonymizeProperty;
+use Oberon\Anonymize\Model\AnonymizePropertyInterface;
 
 final class Hash extends AbstractStrategy
 {
-    public function handle($entity, AnonymizeProperty $annotation, \ReflectionProperty $property)
+    public function handle($entity, AnonymizePropertyInterface $anonymizeProperty, \ReflectionProperty $property)
     {
         return self::hash(
             $property->getValue($entity),
-            $annotation->algorithm
+            $anonymizeProperty->algorithm,
+            $anonymizeProperty->salt
         );
     }
 
-    public static function hash($value, $algorithm = 'md5'): string
+    public static function hash($value, $algorithm = 'md5', string $salt = ''): string
     {
-        return hash($algorithm, $value);
+        return hash($algorithm, $salt.$value);
     }
 }

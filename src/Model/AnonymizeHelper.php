@@ -26,19 +26,6 @@ class AnonymizeHelper
     }
 
     /**
-     * Get all registered Entity classes from the manager
-     *
-     * @param ObjectManager $manager
-     * @return string[]
-     */
-    public function getEntityClasses(ObjectManager $manager): array
-    {
-        return array_map(function (ClassMetadata $meta) {
-            return $meta->getName();
-        }, $manager->getMetadataFactory()->getAllMetadata());
-    }
-
-    /**
      * Go over all properties of the given glass to see if there are
      * Anonymize annotations on it.
      *
@@ -46,7 +33,7 @@ class AnonymizeHelper
      * @return AnnotatedProperty[]
      * @throws AnnotationException
      */
-    public function getAnnotatedPropertiesForClass(string $class): array
+    public function getAnnotatedPropertiesForClass(string $class, $group = Anonymize::DEFAULT_GROUP): array
     {
         try {
             // create reflection class to get properties
@@ -55,11 +42,13 @@ class AnonymizeHelper
             $properties = $reflClass->getProperties(\ReflectionProperty::IS_PRIVATE | \ReflectionProperty::IS_PROTECTED | \ReflectionProperty::IS_PUBLIC);
 
             // loop over properties to see if there are any anonymize annotations
-            return array_reduce($properties, function (array $acc, \ReflectionProperty $prop) {
-                /** @var AnonymizeProperty|null $annotation */
-                $annotation = $this->reader->getPropertyAnnotation($prop, AnonymizeProperty::class);
-                if ($annotation) {
-                    $acc[] = new AnnotatedProperty($prop, $annotation);
+            return array_reduce($properties, function (array $acc, \ReflectionProperty $prop) use ($group) {
+                /** @var AbstractAnonymizeProperty|null $annotation */
+                $annotations = $this->reader->getPropertyAnnotations($prop);
+                foreach ($annotations as $annotation) {
+                    if ($annotation instanceof AnonymizePropertyInterface && $annotation->getGroup() === $group) {
+                        $acc[] = new AnnotatedProperty($prop, $annotation);
+                    }
                 }
                 return $acc;
             }, []);
@@ -67,12 +56,19 @@ class AnonymizeHelper
         return [];
     }
 
-    public function getClassAnnotation(string $class): ?Anonymize
+    /**
+     * @param string $class
+     * @return Anonymize[]
+     */
+    public function getClassAnnotations(string $class): ?array
     {
         try {
             // create reflection class to get properties
             $reflClass = new ReflectionClass($class);
-            return $this->reader->getClassAnnotation($reflClass, Anonymize::class);
+            $annotations = $this->reader->getClassAnnotations($reflClass);
+            return array_filter($annotations, function ($annotation) {
+                return $annotation instanceof Anonymize;
+            });
         } catch (\ReflectionException $e) {}
 
         return null;

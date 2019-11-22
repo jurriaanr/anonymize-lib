@@ -7,7 +7,6 @@
 
 namespace Oberon\Anonymize\Model;
 
-use Oberon\Anonymize\Annotations\AnonymizeProperty;
 use ReflectionProperty;
 
 class AnnotatedProperty
@@ -15,23 +14,23 @@ class AnnotatedProperty
     /** @var ReflectionProperty */
     private $property;
 
-    /** @var AnonymizeProperty */
-    private $annotation;
+    /** @var AnonymizePropertyInterface */
+    private $anonymizeProperty;
 
-    public function __construct(ReflectionProperty $property, AnonymizeProperty $annotation)
+    public function __construct(ReflectionProperty $property, AnonymizePropertyInterface $anonymizeProperty)
     {
         $this->property = $property;
-        $this->annotation = $annotation;
+        $this->anonymizeProperty = $anonymizeProperty;
     }
 
-    public function getAnnotation(): AnonymizeProperty
+    public function getPropertyInfo(): AnonymizePropertyInterface
     {
-        return $this->annotation;
+        return $this->anonymizeProperty;
     }
 
-    public function setAnnotation(AnonymizeProperty $annotation): void
+    public function setAnonymizeProperty(AnonymizePropertyInterface $anonymizeProperty): void
     {
-        $this->annotation = $annotation;
+        $this->anonymizeProperty = $anonymizeProperty;
     }
 
     public function getProperty(): ReflectionProperty

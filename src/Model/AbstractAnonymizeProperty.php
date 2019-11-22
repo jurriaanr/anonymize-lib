@@ -5,10 +5,12 @@
  * Time: 18:57
  */
 
-namespace Oberon\Anonymize\Annotations;
+namespace Oberon\Anonymize\Model;
 
-abstract class AnonymizeProperty
+abstract class AbstractAnonymizeProperty implements AnonymizePropertyInterface
 {
+    public $group = AnonymizeInterface::DEFAULT_GROUP;
+
     public function __construct(array $values)
     {
         foreach ($values as $key => $value) {
@@ -17,6 +19,11 @@ abstract class AnonymizeProperty
     }
 
     abstract public function getStrategy(): string;
+
+    public function getGroup(): string
+    {
+        return $this->group;
+    }
 
     /**
      * Error handler for unknown property
@@ -40,3 +47,4 @@ abstract class AnonymizeProperty
         );
     }
 }
+

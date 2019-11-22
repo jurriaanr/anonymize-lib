@@ -7,11 +7,11 @@
 
 namespace Oberon\Anonymize\Resolver;
 
-use Oberon\Anonymize\Annotations\Anonymize;
-use Oberon\Anonymize\Annotations\AnonymizeProperty;
+use Oberon\Anonymize\Model\AnonymizeInterface;
+use Oberon\Anonymize\Model\AnonymizePropertyInterface;
 use Oberon\Anonymize\Strategy\Strategy;
 
 interface StrategyResolver
 {
-    public function resolve(AnonymizeProperty $anonymizeProperty, Anonymize $classAnnotation): ?Strategy;
+    public function resolve(AnonymizePropertyInterface $anonymizeProperty, AnonymizeInterface $anonymizeInfo): ?Strategy;
 }

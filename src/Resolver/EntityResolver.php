@@ -9,9 +9,9 @@ namespace Oberon\Anonymize\Resolver;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\Internal\Hydration\IterableResult;
-use Oberon\Anonymize\Annotations\Anonymize;
+use Oberon\Anonymize\Model\AnonymizeInterface;
 
 interface EntityResolver
 {
-    public function resolve(string $class, Anonymize $classAnnotation, ObjectManager $manager): IterableResult;
+    public function resolve(string $class, AnonymizeInterface $anonymizeInfo, ObjectManager $manager): IterableResult;
 }

@@ -3,7 +3,7 @@
 namespace Oberon\Anonymize\Annotations;
 
 use Doctrine\Common\Annotations\Annotation\Required;
-use Oberon\Anonymize\Strategy\Strategy;
+use Oberon\Anonymize\Model\AbstractAnonymizeProperty;
 
 /**
  * @Annotation
@@ -12,7 +12,7 @@ use Oberon\Anonymize\Strategy\Strategy;
  *   @Attribute("strategy", type = "string"),
  * })
  */
-final class Custom extends AnonymizeProperty
+final class Custom extends AbstractAnonymizeProperty
 {
     /** @Required() */
     public $strategy;

@@ -3,6 +3,7 @@
 namespace Oberon\Anonymize\Annotations;
 
 use Doctrine\Common\Annotations\Annotation\Required;
+use Oberon\Anonymize\Model\AbstractAnonymizeProperty;
 use Oberon\Anonymize\Strategy\Strategy;
 
 /**
@@ -15,7 +16,7 @@ use Oberon\Anonymize\Strategy\Strategy;
  *   @Attribute("delimiter", type = "string"),
  * })
  */
-final class Regex extends AnonymizeProperty
+final class Regex extends AbstractAnonymizeProperty
 {
     /** @Required() */
     public $regex;

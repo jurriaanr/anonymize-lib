@@ -2,17 +2,17 @@
 
 namespace Oberon\Anonymize\Strategy;
 
-use Oberon\Anonymize\Annotations\AnonymizeProperty;
+use Oberon\Anonymize\Model\AnonymizePropertyInterface;
 
 final class Mask extends AbstractStrategy
 {
-    public function handle($entity, AnonymizeProperty $annotation, \ReflectionProperty $property)
+    public function handle($entity, AnonymizePropertyInterface $anonymizeProperty, \ReflectionProperty $property)
     {
         return self::mask(
             $property->getValue($entity),
-            $annotation->maskCount,
-            $annotation->replaceCount,
-            $annotation->char
+            $anonymizeProperty->maskCount,
+            $anonymizeProperty->replaceCount,
+            $anonymizeProperty->char
         );
     }
 

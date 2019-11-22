@@ -2,6 +2,7 @@
 
 namespace Oberon\Anonymize\Annotations;
 
+use Oberon\Anonymize\Model\AbstractAnonymizeProperty;
 use Oberon\Anonymize\Strategy\Strategy;
 
 /**
@@ -13,7 +14,7 @@ use Oberon\Anonymize\Strategy\Strategy;
  *   @Attribute("replaceCount", type = "int"),
  * })
  */
-final class Mask extends AnonymizeProperty
+final class Mask extends AbstractAnonymizeProperty
 {
     public $char = '*';
     public $maskCount = 4;

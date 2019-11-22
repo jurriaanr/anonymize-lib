@@ -4,27 +4,24 @@ namespace Oberon\Anonymize\Annotations;
 
 use Doctrine\Common\Annotations\Annotation\Enum;
 use Doctrine\Common\Annotations\Annotation\Target;
+use Oberon\Anonymize\Model\AnonymizeInterface;
 
 /**
  * @Annotation
  * @Target({"CLASS"})
  * @Attributes({
+ *   @Attribute("group", type = "string"),
  *   @Attribute("mode", type = "string"),
  *   @Attribute("dateField", type = "string"),
  *   @Attribute("dateInterval", type = "string"),
  * })
  */
-class Anonymize
+class Anonymize implements AnonymizeInterface
 {
-    // If it is not yet anonymized
-    const FIRST_TIME = 'first';
-    // Always (This may keep altering the data!)
-    const FORCE = 'force';
-    // Once a certain period has passed
-    const AFTER_DATE = 'date';
+    private $group = self::DEFAULT_GROUP;
 
     /**
-     * @Enum({Anonymize::FORCE, Anonymize::FIRST_TIME, Anonymize::AFTER_DATE})
+     * @Enum({AnonymizeInterface::FORCE, AnonymizeInterface::FIRST_TIME, AnonymizeInterface::AFTER_DATE})
      */
     private $mode;
     /**
@@ -47,7 +44,7 @@ class Anonymize
         $this->dateInterval = isset($values['dateInterval']) ? $values['dateInterval'] : 'P3M';
     }
 
-    public function getMode()
+    public function getMode(): string
     {
         return $this->mode;
     }
@@ -60,5 +57,10 @@ class Anonymize
     public function getDateInterval(): string
     {
         return $this->dateInterval;
+    }
+
+    public function getGroup(): string
+    {
+        return $this->group;
     }
 }

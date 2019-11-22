@@ -7,17 +7,17 @@
 
 namespace Oberon\Anonymize\Strategy;
 
-use Oberon\Anonymize\Annotations\AnonymizeProperty;
+use Oberon\Anonymize\Model\AnonymizePropertyInterface;
 
 final class ZipNL extends AbstractStrategy
 {
     /** @return mixed */
-    public function handle($entity, AnonymizeProperty $annotation, \ReflectionProperty $property)
+    public function handle($entity, AnonymizePropertyInterface $anonymizeProperty, \ReflectionProperty $property)
     {
         return self::zipNl(
             $property->getValue($entity),
-            $annotation->strength,
-            $annotation->asValid
+            $anonymizeProperty->strength,
+            $anonymizeProperty->asValid
         );
     }
 

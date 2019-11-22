@@ -2,18 +2,18 @@
 
 namespace Oberon\Anonymize\Strategy;
 
-use Oberon\Anonymize\Annotations\AnonymizeProperty;
+use Oberon\Anonymize\Model\AnonymizePropertyInterface;
 
 final class Regex extends AbstractStrategy
 {
-    public function handle($entity, AnonymizeProperty $annotation, \ReflectionProperty $property)
+    public function handle($entity, AnonymizePropertyInterface $anonymizeProperty, \ReflectionProperty $property)
     {
         return self::regex(
             $property->getValue($entity),
-            $annotation->regex,
-            $annotation->replace,
-            $annotation->options,
-            $annotation->delimiter
+            $anonymizeProperty->regex,
+            $anonymizeProperty->replace,
+            $anonymizeProperty->options,
+            $anonymizeProperty->delimiter
         );
     }
 

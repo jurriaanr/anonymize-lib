@@ -7,8 +7,8 @@
 
 namespace Oberon\Anonymize\Resolver;
 
-use Oberon\Anonymize\Annotations\Anonymize;
-use Oberon\Anonymize\Annotations\AnonymizeProperty;
+use Oberon\Anonymize\Model\AnonymizeInterface;
+use Oberon\Anonymize\Model\AnonymizePropertyInterface;
 use Oberon\Anonymize\Strategy\Strategy;
 use Psr\Container\ContainerInterface;
 
@@ -25,7 +25,7 @@ class DefaultStrategyResolver implements StrategyResolver
         $this->cache = [];
     }
 
-    public function resolve(AnonymizeProperty $anonymizeProperty, Anonymize $classAnnotation): ?Strategy
+    public function resolve(AnonymizePropertyInterface $anonymizeProperty, AnonymizeInterface $anonymizeInfo): ?Strategy
     {
         if (isset($this->cache[$anonymizeProperty->getStrategy()])) {
             return $this->cache[$anonymizeProperty->getStrategy()];
@@ -41,7 +41,7 @@ class DefaultStrategyResolver implements StrategyResolver
         }
 
         if ($strategy) {
-            $strategy->setClassAnnotation($classAnnotation);
+            $strategy->setAnonymizeInfo($anonymizeInfo);
         }
 
         $this->cache[$anonymizeProperty->getStrategy()] = $strategy;
